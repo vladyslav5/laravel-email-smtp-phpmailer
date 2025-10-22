@@ -13,6 +13,7 @@ class Email extends Model
         'cc_address',
         'subject',
         'body',
+        'type',
         'ip_address',
         'user_agent',
     ];
