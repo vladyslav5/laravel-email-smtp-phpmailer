@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmailRequest;
+use App\Jobs\SendEmailJob;
 use App\Models\Email;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -26,7 +27,7 @@ class EmailController extends Controller
             'ip_address'   => $request->ip(),
             'user_agent'   => $request->userAgent(),
         ]);
-
+        SendEmailJob::dispatch($email);
         return redirect()->route('email.success', ['email' => $email->uuid]);
     }
     public function success(Email $email):View
